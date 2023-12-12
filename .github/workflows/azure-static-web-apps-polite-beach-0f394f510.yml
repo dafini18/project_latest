@@ -31,6 +31,11 @@ jobs:
         with:
           python-version: 3.11
 
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          python -m pip install -r requirements.txt  # Adjust if your dependencies are listed in a different file
+
       - name: Build And Deploy
         id: builddeploy
         uses: Azure/static-web-apps-deploy@v1
@@ -38,9 +43,9 @@ jobs:
           azure_static_web_apps_api_token: ${{ secrets.AZURE_STATIC_WEB_APPS_API_TOKEN_POLITE_BEACH_0F394F510 }}
           repo_token: ${{ secrets.GITHUB_TOKEN }}
           action: "upload"
-          app_location: "/pyth"
+          app_location: "/pyth"  # Adjust based on your project structure
           api_location: ""  # Leave this empty if you don't have an API
-          output_location: "/"
+          output_location: "/path/to/your/build"  # Adjust if your build artifacts are in a different directory
 
   close_pull_request_job:
     if: github.event_name == 'pull_request' && github.event.action == 'closed'
