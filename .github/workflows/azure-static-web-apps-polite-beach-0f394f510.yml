@@ -16,11 +16,11 @@ jobs:
     name: Build and Deploy Job
     steps:
       - name: Set up apt-utils
-          run:|
-            sudo apt-get update
-            sudo apt-get install -y apt-utils
-          if: runner.os == 'Linux'
-          
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y apt-utils
+        if: runner.os == 'Linux'
+
       - uses: actions/checkout@v3
         with:
           submodules: true
@@ -29,7 +29,7 @@ jobs:
       - name: Set up Python
         uses: actions/setup-python@v2
         with:
-          python-version: 3.11  
+          python-version: 3.11
 
       - name: Build And Deploy
         id: builddeploy
@@ -41,7 +41,7 @@ jobs:
           app_location: "/pyth"
           api_location: ""  # Leave this empty if you don't have an API
           output_location: "/"
-          
+
   close_pull_request_job:
     if: github.event_name == 'pull_request' && github.event.action == 'closed'
     runs-on: ubuntu-latest
