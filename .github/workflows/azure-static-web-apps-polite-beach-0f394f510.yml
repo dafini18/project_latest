@@ -15,6 +15,12 @@ jobs:
     runs-on: ubuntu-latest
     name: Build and Deploy Job
     steps:
+      - name: Set up apt-utils
+          run:|
+            sudo apt-get update
+            sudo apt-get install -y apt-utils
+          if: runner.os == 'Linux'
+          
       - uses: actions/checkout@v3
         with:
           submodules: true
